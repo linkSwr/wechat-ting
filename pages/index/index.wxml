@@ -1,0 +1,2 @@
+<text>{{ msg }}</text>
+<map longitude="{{longitude}}" latitude="{{latitude}}"></map>
