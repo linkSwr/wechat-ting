@@ -1,0 +1,14 @@
+{
+  "name": "yuyin-rest",
+  "version": "1.0.0",
+  "description": "yuyin REAT API test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sue",
+  "license": "MIT",
+  "dependencies": {
+    "baidu-aip-sdk": "^2.2.0"
+  }
+}
