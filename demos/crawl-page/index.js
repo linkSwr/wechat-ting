@@ -6,5 +6,5 @@ function app(url) {
 }
 
 // 抓取脚本入口
-let url = 'http://36kr.com/p/5136042.html';
+let url = 'http://36kr.com';
 app(url);
