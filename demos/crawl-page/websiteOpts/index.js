@@ -25,11 +25,13 @@ function urlParser(proto, hostname, href) {
 
 result[Symbol.for('36kr.com')] = {
 	pageType: 'listPage',
-	pageParser: (html, url) => {
+	// 一个用来把列表页的文章链接地址解析提取出来的方法
+	listPageParser: (html, url) => {
 		// 获取banner地址list
 		let banners = [];
 		Array.prototype.forEach.call(html.find('.banner_cell'), item => {
 
+			// 使url合法化
 			let href = urlParser('https', '36kr.com', $(item).find('a').attr('href'));
 
 			banners.push({
@@ -38,8 +40,10 @@ result[Symbol.for('36kr.com')] = {
 			})
 		});
 
+		// 获取页面文章列表url
 		let detailList = [];
 		Array.prototype.forEach.call(html.find('.inner_li > a'), item => {
+			// 使url合法化
 			let href = urlParser('https', '36kr.com', $(item).attr('href'));
 
 			detailList.push({
@@ -50,14 +54,14 @@ result[Symbol.for('36kr.com')] = {
 
 		return banners.concat(detailList);
 	},
-	// pageParser: (html, url) => {
-	// 	// 获取列表页的地址列表
-	// 	return {
-	// 		title: html.find('.mobile_article h1').text(),
-	// 		url: url,
-	// 		content: html.find('.textblock').text()
-	// 	};
-	// }
+	pageParser: (html, url) => {
+		// 获取列表页的地址列表
+		return {
+			title: html.find('.mobile_article h1').text(),
+			url: url,
+			content: html.find('.textblock').text()
+		};
+	}
 };
 
 module.exports = result;

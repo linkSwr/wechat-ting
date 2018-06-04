@@ -5,8 +5,8 @@ var page = require('webpage').create(),
 // var {URL} = require('url');
 
 if (system.args.length === 1) {
-  console.log('Usage: loadspeed.js <some URL>');
-  phantom.exit();
+ 	console.log('Usage: loadspeed.js <some URL>');
+ 	phantom.exit();
 }
 
 t = Date.now();

@@ -13,6 +13,10 @@ function getStrMd5(str) {
     return md5.update(str).digest('hex')
 }
 
+function getCanBuildReqCount() {
+    return maxTaskCount - runningTaskNum;
+}
+
 function standardProgress(url) {
     let urlHex = getStrMd5(url);
     let fn = crawl;
@@ -24,14 +28,18 @@ function standardProgress(url) {
     runningTaskNum++;
 
     // 抓取
-    tasks[urlHex] = tinyTask(url, fn);
+    tasks[urlHex] = tinyTask(url, fn, {waittingTasks});
     tasks[urlHex]
     .then((oldUrlHex => data => {
         runningTaskNum--;
         if (waittingTasks.length) {
-            let url = waittingTasks.shift();
+            let canReqCount = getCanBuildReqCount();
 
-            standardProgress(url);
+            while(canReqCount-- > 0) {
+                let url = waittingTasks.shift();
+
+                url && standardProgress(url);
+            }
         }
         delete tasks[oldUrlHex];
     })(urlHex));

@@ -93,14 +93,25 @@ function analyzePageContent(html, parser) {
 }
 
 // 爬取流程
-function crawl(reqUrl) {
+function crawl(reqUrl, extendOpts) {
     let url = new URL(reqUrl);
     let opt = websiteOpts[Symbol.for(url.hostname + url.pathname.replace(/\/[^\/]*$/, ''))];
 
     if (opt) {
         return fetchPage(reqUrl)
         .then(result => {
-            return analyzePageContent(result, opt.pageParser);
+            switch(opt.pageType) {
+                case 'detail': 
+                    return analyzePageContent(result, opt.pageParser);
+                case 'listPage':
+                    let analyzeResult = analyzePageContent(result, opt.listPageParser)
+                    analyzeResult.forEach(item => {
+                        extendOpts.waittingTasks.push(item.href);
+                    });
+                    
+                    return null;
+
+            }
         });
     }
 
