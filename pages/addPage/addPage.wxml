@@ -1,0 +1,3 @@
+<view>
+	<button type="default" size="default" loading="{{false}}" plain="{{false}}" bindtap="getDataFromClipboard"> 从粘贴板获取文章地址 </button>
+</view>

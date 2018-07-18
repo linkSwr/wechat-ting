@@ -1,0 +1,38 @@
+.section{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  max-height: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.section-title {
+    height: 60rpx;
+}
+
+.page-list {
+    max-height: 100%;
+    padding: 60rpx 0;
+    overflow: scroll;
+}
+
+.item-inner {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    justify-content: space-between;
+    align-items: stretch;
+    font-size: 30rpx;
+    transition: 0.1s;
+}
+
+.item-inner:active {
+    background-color: #ddd;
+}
+
+.item-inner .item-icon::before{
+    content: '<';
+    display: inline-block;
+    padding: 30rpx;
+}

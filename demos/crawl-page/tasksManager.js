@@ -29,7 +29,8 @@ function standardProgress(url) {
 
     // 抓取
     tasks[urlHex] = tinyTask(url, fn, {waittingTasks});
-    tasks[urlHex]
+    
+    return tasks[urlHex]
     .then((oldUrlHex => data => {
         runningTaskNum--;
         if (waittingTasks.length) {
@@ -42,6 +43,8 @@ function standardProgress(url) {
             }
         }
         delete tasks[oldUrlHex];
+
+        return data;
     })(urlHex));
 }
 
@@ -55,7 +58,7 @@ function manager(url) {
         return;
     }
 
-    standardProgress(url);
+    return standardProgress(url);
 }
 
 module.exports = manager;

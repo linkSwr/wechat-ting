@@ -2,9 +2,15 @@ var tasksManager = require('./tasksManager');
 
 function app(url) {
 	// 使用tasksManager进行任务管理
-	tasksManager(url);
+	return tasksManager(url);
 }
+
+var args = process.argv.slice(2);
+let URL = args[0];
 
 // 抓取脚本入口
 let url = 'http://36kr.com';
-app(url);
+// app(URL || url);
+
+
+module.exports = app;

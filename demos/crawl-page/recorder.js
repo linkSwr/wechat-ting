@@ -3,6 +3,7 @@
 // 2. 把记录写入到本地文件
 const path = require('path');
 const saveIO = require('./saveIO');
+const fs = require('fs');
 
 function recorderUrl(url) {
     let logFilePath = path.join(__dirname, './logs/noOptsUrl.txt');
@@ -12,8 +13,14 @@ function recorderUrl(url) {
     saveIO(logFilePath, contentArr.join(wrapStr) + wrapStr);
 }
 
-function saveResult(content) {
-    let logFilePath = path.join(__dirname, `./crawlData/${new Date().valueOf()}.json`);
+function saveResult(content, fileName) {
+    let logFilePath = path.join(__dirname, `./crawlData/${fileName}.json`);
+    let dir = path.join(__dirname, `./crawlData`);
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+
     saveIO(logFilePath, content);
 }
 
@@ -23,10 +30,10 @@ const recorderOpts = {
 }
 
 function recorder(opts) {
-    let {type, data} = opts;
+    let {type, data, fileName} = opts;
     
     if (recorderOpts[type]) {
-        recorderOpts[type](data);
+        recorderOpts[type](data, fileName);
     }
 }
 

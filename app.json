@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/addPage/addPage",
+    "pages/listPage/listPage",
     "pages/index/index"
   ],
   "window":{
