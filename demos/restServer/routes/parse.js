@@ -50,7 +50,7 @@ const parse = (appId, ak, sk, modules) => async ctx => {
 			audioRecord[urlHash] = {
 				thunks: result,
 				url: pageUrl,
-				title: data.title
+				title: data.title 
 			}
 
 			fs.writeFile(recordPath, JSON.stringify(audioRecord), (err) => {
